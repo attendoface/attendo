@@ -1,9 +1,12 @@
+# FastAPI core
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
-sqlalchemy==2.0.23
+
+# Data & models
+SQLAlchemy==2.0.23
 pydantic[email]==2.5.0
 
-# Auth
+# Auth & forms
 PyJWT==2.8.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.6
@@ -11,13 +14,17 @@ python-multipart==0.0.6
 # Env
 python-dotenv==1.0.0
 
-# Google Cloud SQL (PyMySQL)
-cloud-sql-python-connector[pymysql]==1.5.0
-pymysql==1.1.0
+# Choose ONE database driver (match your DATABASE_URL):
+psycopg[binary]==3.2.1    # for Postgres (Render default)  ← pick this
+# pymysql==1.1.0          # for MySQL (uncomment if you use MySQL)
 
-# Anti-spoofing / image stack
-torch
-torchvision
-opencv-python
-pillow
-numpy
+# Optional ML/image stack (keep only if you really use it)
+numpy==1.26.4
+pillow==10.4.0
+opencv-python-headless==4.10.0.84
+
+# Optional: PyTorch CPU (comment out if not needed)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.4.1
+torchvision==0.19.1
+
