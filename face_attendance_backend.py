@@ -29,7 +29,7 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float, 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session, relationship
 
-import pymysql
+
 
 # ============= CONFIGURATION =============
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
