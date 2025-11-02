@@ -227,7 +227,8 @@ allow_creds = not (len(ALLOWED_ORIGINS) == 1 and ALLOWED_ORIGINS[0] == "*")
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000"
-    "https://attendoface.github.io/attendo"
+    "https://attendoface.github.io"
+    "https://attendo-backend.onrender.com"
 ]
 
 app.add_middleware(
