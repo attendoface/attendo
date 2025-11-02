@@ -655,27 +655,26 @@ async function refreshAttendance(){
 }
 
 function renderLiveAttendance(list){
-  const tbody = $('#attRows'); 
+  const tbody = $('#attRows');
   tbody.innerHTML='';
-  const query = ($('#liveAttSearch').value || '').toLowerCase();
-  const filtered = query ? list.filter(a => (a.student_name || '').toLowerCase().includes(query)) : list;
-
-  if (!filtered.length) {
-    tbody.innerHTML = `<tr><td colspan="3" class="small">No check-ins yet.</td></tr>`;
-    return;
-  }
+  const query = $('#liveAttSearch').value.toLowerCase();
+  const filtered = query ? list.filter(a => a.student_name.toLowerCase().includes(query)) : list;
+ 
   for(const a of filtered){
-    const t = toEasternTimeOnly(a.timestamp);
+    const date = toEasternDateOnly(a.timestamp);
+    const time = toEasternTimeOnly(a.timestamp);
     const cls = a.status==='present' ? 'status-ok' : (a.status==='late' ? 'status-warn' : 'status-err');
     const tr = document.createElement('tr');
     tr.innerHTML = `
+      <td>${date}</td>
+      <td>${a.course_name || 'N/A'}</td>
       <td>${a.student_name}</td>
-      <td>${t}</td>
-      <td class="${cls}">${String(a.status || '').toUpperCase()}</td>`;
+      <td>${a.student_code || '—'}</td>
+      <td>${time}</td>
+      <td class="${cls}">${a.status.toUpperCase()}</td>`;
     tbody.appendChild(tr);
   }
 }
-
 $('#liveAttSearch').oninput = refreshAttendance;
 
 /* =========================
