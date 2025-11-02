@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Attendo | Face Attendance System</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+</head>
+<body class="home-bg">
+  <header>
+    <div class="header-brand">
+      <img src="assets/logo.png" class="header-logo" alt="VeriFace logo"/>
+      <div class="logo">Attendo</div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="app.html" class="active">Login</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <span class="user-tag hidden" id="authTag">Welcome</span>
+      <button class="logout-btn hidden" id="btnLogout">Logout</button>
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="app-container">
+    <!-- Landing -->
+    <section class="card" id="landing">
+      <h2 class="center">Sign in or create an account</h2>
+      <div class="tabs center">
+        <button class="tab active" id="tabSignIn">Sign In</button>
+        <button class="tab" id="tabCreate">Create Account</button>
+      </div>
+
+      <!-- Sign In -->
+      <div class="grid grid-2" id="signInForm">
+        <div>
+          <label>Email</label>
+          <input class="input" id="loginEmail" placeholder="you@school.edu" />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" class="input" id="loginPassword" placeholder="••••••••" />
+        </div>
+        <div>
+          <button class="btn-primary" id="btnLogin">Sign In</button>
+        </div>
+      </div>
+
+      <!-- Create Account -->
+      <div id="createFlow" class="hidden">
+        <p class="center small">Choose an account type:</p>
+        <div class="tabs center">
+          <button class="tab active" id="tabRoleAdmin">Admin</button>
+          <button class="tab" id="tabRoleStudent">Student</button>
+        </div>
+
+        <div class="grid grid-2" id="createForm">
+          <div>
+            <label>Full Name</label>
+            <input class="input" id="regName" placeholder="Full name" />
+          </div>
+          <div>
+            <label>Email</label>
+            <input class="input" id="regEmail" placeholder="you@school.edu" />
+          </div>
+          <div>
+            <label>Password</label>
+            <input type="password" class="input" id="regPassword" placeholder="••••••••" />
+          </div>
+
+          <!-- Student only -->
+          <div id="studentExtra" class="hidden">
+            <label>Upload Face Photo</label>
+            <input type="file" id="faceFile" accept="image/*" class="input" />
+            <img id="facePreview" class="preview hidden" alt="Face preview" />
+          </div>
+
+          <!-- Admin only -->
+          <div id="adminExtra">
+            <p class="small">Admins don't need a face photo.<br>You will create courses and join codes.</p>
+          </div>
+
+          <div>
+            <button class="btn-primary" id="btnCreate">Create Account</button>
+            <p class="small" id="createMsg"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section class="card hidden" id="adminDash">
+      <h2>Admin Dashboard</h2>
+      <div class="grid grid-2">
+        <div>
+          <h3>Create Course</h3>
+          <input class="input" id="courseName" placeholder="Course name (e.g., Intro to AI)" />
+          <label>Late After (minutes)</label>
+          <input class="input" id="lateMinutes" type="number" value="5" />
+          <label>Absent After (minutes)</label>
+          <input class="input" id="absentMinutes" type="number" value="15" />
+          <button class="btn-primary" id="btnCreateCourse">Create Course & Join Code</button>
+          <p class="small" id="courseCreateMsg"></p>
+        </div>
+        
+        <div>
+          <h3>My Courses</h3>
+          <div class="search-box">
+            <input class="input" id="courseSearch" placeholder="Search courses..." />
+          </div>
+          <table class="table">
+            <thead><tr><th>Name</th><th>Course ID</th><th>Join Code</th><th>Actions</th></tr></thead>
+            <tbody id="courseRows"></tbody>
+          </table>
+
+          <div class="mt-3">
+            <h3>Live Attendance</h3>
+            <p class="small" id="sessionInfo">No active session.</p>
+            <div class="search-box">
+              <input class="input" id="liveAttSearch" placeholder="Search students..." />
+            </div>
+            <table class="table">
+              <thead><tr><th>Student</th><th>Time (ET)</th><th>Status</th></tr></thead>
+              <tbody id="attRows"></tbody>
+            </table>
+          </div>
+          <div class="delete-student mt-3">
+            <hr>
+            <p>
+              <br>
+    <h3>Delete Student Enrollment</h3>
+    <p>Select a student to remove their enrollments and face data.</p>
+          <br>
+    <div class="grid grid-2">
+      <input class="input" id="deleteStudentId" placeholder="Enter Student ID" />
+      <button class="btn-danger" id="btnDeleteStudent">Delete Student Data</button>
+    </div>
+
+    <p class="small" id="deleteStudentMsg"></p>
+  </div>
+        </div>
+      </div>
+</p>
+      <!-- Attendance History -->
+      <div class="mt-3">
+        <div class="section-header">
+          <h3>Attendance History</h3>
+          <button class="btn-secondary" id="btnExportCSV">Export to CSV</button>
+        </div>
+        <div class="grid grid-2">
+          <div class="search-box">
+            <input class="input" id="historySearch" placeholder="Search by student name..." />
+          </div>
+          <div class="search-box">
+            <select class="input" id="historyCourseFilter">
+              <option value="">All Courses</option>
+            </select>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Course</th>
+              <th>Student</th>
+              <th>Student ID</th>
+              <th>Time (ET)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="historyRows"></tbody>
+        </table>
+      </div>
+    </section>
+    
+    <!-- Student Dashboard -->
+    <section class="card hidden" id="studentDash">
+      <h2>Student Dashboard</h2>
+      <div class="grid grid-2">
+        <div>
+          <h3>Enroll with Join Code</h3>
+          <input class="input" id="joinCode" placeholder="e.g., 4KJ9TQ" />
+          <button class="btn-primary" id="btnEnroll">Enroll</button>
+          <p class="small" id="enrollMsg"></p>
+
+          <div class="mt-3">
+            <h3>My Courses</h3>
+            <div class="search-box">
+              <input class="input" id="studentCourseSearch" placeholder="Search courses..." />
+            </div>
+            <table class="table">
+              <thead><tr><th>Course Name</th><th>Course ID</th></tr></thead>
+              <tbody id="studentCourseRows"></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3>Live Check-In</h3>
+          <label>Course ID</label>
+          <input class="input" id="checkinCourseId" placeholder="Course ID" />
+          <video id="checkVideo" autoplay muted playsinline></video>
+          <button class="btn-primary" id="btnCheckIn">Check In</button>
+          <p class="small" id="checkMsg"></p>
+        </div>
+      </div>
+      
+      <!-- Student Attendance History -->
+      <div class="mt-3">
+        <div class="section-header">
+          <h3>My Attendance History</h3>
+          <button class="btn-secondary" id="btnExportStudentCSV">Export to CSV</button>
+        </div>
+        <div class="search-box">
+          <select class="input" id="studentHistoryCourseFilter">
+            <option value="">All Courses</option>
+          </select>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Course</th>
+              <th>Student ID</th>
+              <th>Time (ET)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="studentHistoryRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+<script>
+/* =========================
+   CONFIG
+   ========================= */
+const API_BASE = 'http://localhost:8000';
+
+/* =========================
+   STATE & UTILITIES
+   ========================= */
+let createRole = 'admin';
+let auth = { token:null, role:null, name:null, userId:null };
+let currentSession = null;
+let attPoll = null;
+let allCourses = [];
+let allAttendance = [];
+let studentCourses = [];
+let studentAttendance = [];
+
+const $  = (s)=>document.querySelector(s);
+const show = (sel, vis=true)=>{ const el=$(sel); if(el) el.classList.toggle('hidden', !vis); };
+
+/* =========================
+   TIMEZONE HELPERS
+   ========================= */
+function toEasternTime(dateString) {
+  const date = new Date(dateString + 'Z');
+  return date.toLocaleString('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  });
+}
+function toEasternTimeOnly(dateString) {
+  const date = new Date(dateString + 'Z');
+  return date.toLocaleTimeString('en-US', {
+    timeZone: 'America/New_York',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  });
+}
+function toEasternDateOnly(dateString) {
+  const date = new Date(dateString + 'Z');
+  return date.toLocaleDateString('en-US', { timeZone: 'America/New_York' });
+}
+
+/* =========================
+   THEME TOGGLE
+   ========================= */
+function initTheme(){
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeIcon(saved);
+}
+function updateThemeIcon(theme){
+  const icon = document.querySelector('#themeToggle .theme-icon');
+  if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+}
+document.getElementById('themeToggle').onclick = ()=>{
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateThemeIcon(next);
+};
+initTheme();
+
+/* =========================
+   API
+   ========================= */
+async function api(path, method='GET', body){
+  const res = await fetch(`${API_BASE}${path}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(auth.token ? { 'Authorization': `Bearer ${auth.token}` } : {})
+    },
+    body: body ? JSON.stringify(body) : undefined,
+    credentials: 'omit'
+  });
+  const data = await res.json().catch(()=>null);
+  if (!res.ok) throw new Error(data?.detail || data?.message || 'Request failed');
+  return data;
+}
+
+/* =========================
+   FACE-API.JS
+   ========================= */
+const MODEL_URL = './weights';
+let _faceModelsReady = false;
+
+async function loadFaceModels(){
+  if (_faceModelsReady) return;
+  await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+  await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+  await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
+  _faceModelsReady = true;
+}
+function faceOptions(){ return new faceapi.TinyFaceDetectorOptions({ inputSize: 224, scoreThreshold: 0.5 }); }
+async function ensureModels(){ if(!_faceModelsReady) await loadFaceModels(); }
+
+async function embeddingFromImageElement(imgEl){
+  await ensureModels();
+  const det = await faceapi.detectSingleFace(imgEl, faceOptions()).withFaceLandmarks().withFaceDescriptor();
+  if(!det) throw new Error('No face detected in the uploaded photo.');
+  return Array.from(det.descriptor);
+}
+
+async function setupCamera(videoEl){
+  const stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'user' } });
+  videoEl.srcObject = stream;
+  await new Promise(res => videoEl.onloadedmetadata = res);
+  return stream;
+}
+async function embeddingFromVideoElement(videoEl){
+  await ensureModels();
+  const det = await faceapi.detectSingleFace(videoEl, faceOptions()).withFaceLandmarks().withFaceDescriptor();
+  if(!det) throw new Error('No face detected on camera.');
+  return Array.from(det.descriptor);
+}
+
+// =========================
+// STRICT LIVENESS CHECK
+// =========================
+const MIN_BLINKS_REQUIRED = 1;     // require at least 1 blink
+const CHECK_WINDOW_MS     = 8000;  // 8 seconds window
+const EAR_THRESHOLD       = 0.25;  // eye aspect ratio threshold
+
+async function runStrictLiveness(videoEl){
+  await ensureModels();
+  let blinkCount = 0, moved = false, seenLow = false;
+  let prevL=null, prevR=null;
+  const start = Date.now();
+  const msgEl = document.getElementById('checkMsg');
+  if(msgEl) msgEl.textContent = 'Liveness: please blink or move slightly…';
+
+  // Quick anti-spoof
+  if(detectReflection(videoEl) || detectFlatTexture(videoEl)){
+    if(msgEl) msgEl.textContent = 'Spoofing detected — please use your real face.';
+    return false;
+  }
+
+  while(Date.now()-start < CHECK_WINDOW_MS){
+    const det = await faceapi.detectSingleFace(videoEl, faceOptions()).withFaceLandmarks();
+    if(!det){ await _sleep(120); continue; }
+
+    const left = det.landmarks.getLeftEye();
+    const right = det.landmarks.getRightEye();
+
+    // Blink detection
+    const earVal = (_ear(left)+_ear(right))/2;
+    if(earVal < EAR_THRESHOLD) seenLow = true;
+    else if(seenLow){ blinkCount++; seenLow=false; }
+
+    // Movement detection
+    const lc=_center(left), rc=_center(right);
+    if(prevL && prevR){
+      const ld=Math.hypot(lc.x-prevL.x, lc.y-prevL.y);
+      const rd=Math.hypot(rc.x-prevR.x, rc.y-prevR.y);
+      if(ld>0.8 || rd>0.8) moved = true;
+    }
+    prevL=lc; prevR=rc;
+
+    await _sleep(100);
+  }
+
+  const live = (blinkCount >= MIN_BLINKS_REQUIRED) && moved;
+  if(msgEl){
+    msgEl.textContent = live
+      ? `Liveness passed ✅ (blinks: ${blinkCount}, moved: ${moved})`
+      : 'Liveness failed — please blink or move naturally.';
+  }
+  return live;
+}
+/* =========================
+   LANDING TABS
+   ========================= */
+$('#tabSignIn').onclick = ()=>setAction('signin');
+$('#tabCreate').onclick  = ()=>setAction('create');
+function setAction(which){
+  const isCreate = which==='create';
+  $('#tabCreate').classList.toggle('active', isCreate);
+  $('#tabSignIn').classList.toggle('active', !isCreate);
+  show('#signInForm', !isCreate);
+  show('#createFlow', isCreate);
+}
+setAction('signin');
+
+$('#tabRoleAdmin').onclick   = ()=>setRole('admin');
+$('#tabRoleStudent').onclick = ()=>setRole('student');
+function setRole(role){
+  createRole = role;
+  $('#tabRoleAdmin').classList.toggle('active', role==='admin');
+  $('#tabRoleStudent').classList.toggle('active', role==='student');
+  show('#adminExtra', role==='admin');
+  show('#studentExtra', role==='student');
+}
+setRole('admin');
+
+$('#faceFile')?.addEventListener('change', (e)=>{
+  const file = e.target.files?.[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  const img = $('#facePreview');
+  img.src = url;
+  img.classList.remove('hidden');
+});
+
+/* =========================
+   AUTH
+   ========================= */
+$('#btnLogin').onclick = async (ev)=>{
+  ev.preventDefault();
+  try{
+    const data = await api('/auth/login','POST',{ 
+      email: $('#loginEmail').value.trim(), 
+      password: $('#loginPassword').value 
+    });
+    auth = { token: data.access_token, role: data.role, name: data.name, userId: data.user_id };
+    postLoginUI();
+  }catch(e){ alert(e.message || 'Login failed'); }
+};
+
+$('#btnCreate').onclick = async (ev)=>{
+  ev.preventDefault();
+  try{
+    let faceVec = null;
+    if (createRole === 'student') {
+      const img = document.getElementById('facePreview');
+      if (!img || !img.src) throw new Error('Please upload a face photo for student signup.');
+      faceVec = await embeddingFromImageElement(img);
+    }
+    const data = await api('/auth/register','POST',{
+      name: $('#regName').value.trim(),
+      email: $('#regEmail').value.trim(),
+      password: $('#regPassword').value,
+      role: (createRole==='admin' ? 'professor' : 'student'),
+      face_embedding: faceVec
+    });
+    auth = { token: data.access_token, role: data.role, name: data.name, userId: data.user_id };
+    $('#createMsg').textContent = 'Account created!';
+    postLoginUI();
+  }catch(err){
+    $('#createMsg').textContent = err.message || 'Signup error';
+  }
+};
+
+$('#btnLogout').onclick = ()=>{
+  auth = { token:null, role:null, name:null, userId:null };
+  currentSession = null;
+  stopAttendancePoll();
+  show('#landing', true);
+  show('#adminDash', false);
+  show('#studentDash', false);
+  show('#authTag', false);
+  show('#btnLogout', false);
+  $('#loginEmail').value = '';
+  $('#loginPassword').value = '';
+};
+
+function postLoginUI(){
+  $('#authTag').textContent = `${auth.role||'professor'} — ${auth.name||'User'}`;
+  show('#authTag', true);
+  show('#btnLogout', true);
+  show('#landing', false);
+  if ((auth.role||'professor') === 'professor') loadAdmin(); else loadStudent();
+}
+
+/* =========================
+   ADMIN
+   ========================= */
+async function loadAdmin(){ 
+  show('#adminDash', true); 
+  await refreshCourses();
+  await refreshAttendanceHistory();
+}
+
+async function refreshCourses(){
+  const rows = $('#courseRows'); 
+  rows.innerHTML='';
+  try{
+    const courses = await api('/courses/mine');
+    allCourses = courses;
+    updateHistoryCourseFilter(courses);
+    renderCourses(courses);
+  }catch(e){
+    rows.innerHTML = `<tr><td colspan="4" class="small status-err">${e.message||'Failed to load courses'}</td></tr>`;
+  }
+}
+
+function renderCourses(courses){
+  const rows = $('#courseRows');
+  rows.innerHTML = '';
+  if (!courses.length){
+    rows.innerHTML = `<tr><td colspan="4" class="small">No courses yet — create one on the left.</td></tr>`;
+    return;
+  }
+  for(const c of courses){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${c.name}</td><td><span class="kbd">${c.id}</span></td><td><span class="kbd">${c.code}</span></td>
+      <td>
+        <button class="btn-ghost" data-act="start" data-course="${c.id}">Start</button>
+        <button class="btn-ghost" data-act="stop"  data-course="${c.id}">Stop</button>
+      </td>`;
+    rows.appendChild(tr);
+  }
+}
+
+$('#courseSearch').oninput = (e)=>{
+  const query = e.target.value.toLowerCase();
+  const filtered = allCourses.filter(c => c.name.toLowerCase().includes(query));
+  renderCourses(filtered);
+};
+
+$('#btnCreateCourse').onclick = async (ev)=>{
+  ev.preventDefault();
+  const btn = ev.currentTarget;
+  try{
+    const name = $('#courseName').value.trim();
+    const late   = +($('#lateMinutes').value || 5);
+    const absent = +($('#absentMinutes').value || 15);
+    if(!name){ $('#courseCreateMsg').textContent = 'Enter a course name.'; return; }
+
+    btn.disabled = true; btn.textContent = 'Creating…';
+    const c = await api('/courses','POST',{ name });
+    $('#courseCreateMsg').textContent = `Created ${c.name} — join code ${c.code}`;
+    $('#courseName').value = '';
+    await refreshCourses();
+
+    const s = await api('/sessions/start','POST',{ course_id: c.id, late_after_minutes: late, absent_after_minutes: absent });
+    currentSession = s;
+    showSessionInfo();
+    startAttendancePoll();
+  }catch(e){
+    $('#courseCreateMsg').textContent = e.message || 'Could not create course.';
+  }finally{
+    btn.disabled = false; btn.textContent = 'Create Course & Join Code';
+  }
+};
+
+$('#courseRows').onclick = async (e)=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  const courseId = +btn.dataset.course;
+  const act = btn.dataset.act;
+
+  if (act === 'start'){
+    try{
+      const late   = +($('#lateMinutes').value || 5);
+      const absent = +($('#absentMinutes').value || 15);
+      const s = await api('/sessions/start','POST',{ course_id: courseId, late_after_minutes: late, absent_after_minutes: absent });
+      currentSession = s;
+      showSessionInfo();
+      startAttendancePoll();
+      alert(`Session started (late>${late}m, absent>${absent}m).`);
+    }catch(err){ alert(err.message||'Could not start session'); }
+  }
+
+  if (act === 'stop'){
+    try{
+      if (!currentSession){ alert('No active session.'); return; }
+      await api(`/sessions/${currentSession.id}/end`, 'POST');
+      currentSession = null;
+      showSessionInfo();
+      stopAttendancePoll();
+      $('#attRows').innerHTML = '';
+      await refreshAttendanceHistory();
+      alert('Session ended.');
+    }catch(err){ alert(err.message||'Could not stop session'); }
+  }
+};
+
+function showSessionInfo(){
+  const el = $('#sessionInfo');
+  if (!currentSession){
+    el.textContent = 'No active session.';
+  } else {
+    const start = toEasternTimeOnly(currentSession.start_time);
+    el.textContent = `Active session for course #${currentSession.course_id} — started ${start} ET. Late>${currentSession.late_after_minutes}m, Absent>${currentSession.absent_after_minutes}m.`;
+  }
+}
+
+function startAttendancePoll(){
+  stopAttendancePoll();
+  attPoll = setInterval(refreshAttendance, 2500);
+  refreshAttendance();
+}
+function stopAttendancePoll(){ if(attPoll){ clearInterval(attPoll); attPoll=null; } }
+
+async function refreshAttendance(){
+  if (!currentSession) return;
+  try{
+    const list = await api(`/attendance/session/${currentSession.id}`, 'GET');
+    renderLiveAttendance(list);
+  }catch(e){
+    $('#attRows').innerHTML = `<tr><td colspan="3" class="small status-err">${e.message||'Failed to load attendance'}</td></tr>`;
+  }
+}
+
+function renderLiveAttendance(list){
+  const tbody = $('#attRows'); 
+  tbody.innerHTML='';
+  const query = $('#liveAttSearch').value.toLowerCase();
+  const filtered = query ? list.filter(a => a.student_name.toLowerCase().includes(query)) : list;
+  
+  for(const a of filtered){
+    const t = toEasternTimeOnly(a.timestamp);
+    const cls = a.status==='present' ? 'status-ok' : (a.status==='late' ? 'status-warn' : 'status-err');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+  <td>${date}</td>
+  <td>${a.course_name || 'N/A'}</td>
+  <td>${a.student_name}</td>
+  <td>${a.student_code || '—'}</td>
+  <td>${time}</td>
+  <td class="${cls}">${a.status.toUpperCase()}</td>`;
+
+    tbody.appendChild(tr);
+  }
+}
+
+$('#liveAttSearch').oninput = refreshAttendance;
+
+/* =========================
+   ATTENDANCE HISTORY (ADMIN)
+   ========================= */
+async function refreshAttendanceHistory(){
+  try{
+    const data = await api('/attendance/history', 'GET');
+    allAttendance = data;
+    renderAttendanceHistory(data);
+  }catch(e){
+    $('#historyRows').innerHTML = `<tr><td colspan="5" class="small status-err">${e.message||'Failed to load history'}</td></tr>`;
+  }
+}
+
+function renderAttendanceHistory(data){
+  const tbody = $('#historyRows');
+  tbody.innerHTML = '';
+  if (!data.length){
+    tbody.innerHTML = `<tr><td colspan="5" class="small">No attendance records yet.</td></tr>`;
+    return;
+  }
+  for(const a of data){
+    const date = toEasternDateOnly(a.timestamp);
+    const time = toEasternTimeOnly(a.timestamp);
+    const cls = a.status==='present' ? 'status-ok' : (a.status==='late' ? 'status-warn' : 'status-err');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+  <td>${date}</td>
+  <td>${a.course_name || 'N/A'}</td>
+  <td>${a.student_name}</td>
+  <td>${a.student_code || '—'}</td>
+  <td>${time}</td>
+  <td class="${cls}">${a.status.toUpperCase()}</td>`;
+
+    tbody.appendChild(tr);
+  }
+}
+
+function updateHistoryCourseFilter(courses){
+  const select = $('#historyCourseFilter');
+  select.innerHTML = '<option value="">All Courses</option>';
+  for(const c of courses){
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = c.name;
+    select.appendChild(opt);
+  }
+}
+
+$('#historySearch').oninput = filterAttendanceHistory;
+$('#historyCourseFilter').onchange = filterAttendanceHistory;
+
+function filterAttendanceHistory(){
+  const query = $('#historySearch').value.toLowerCase();
+  const courseId = $('#historyCourseFilter').value;
+  
+  let filtered = allAttendance;
+  if (query) filtered = filtered.filter(a => a.student_name.toLowerCase().includes(query));
+  if (courseId) filtered = filtered.filter(a => a.course_id == courseId);
+  
+  renderAttendanceHistory(filtered);
+}
+
+$('#btnExportCSV').onclick = ()=>{
+  const data = allAttendance;
+  if (!data.length){ alert('No data to export'); return; }
+  
+  const csv = [
+    ['Date', 'Course', 'Student', 'Time (ET)', 'Status'],
+    ...data.map(a => [
+      toEasternDateOnly(a.timestamp),
+      a.course_name || 'N/A',
+      a.student_name,
+      toEasternTimeOnly(a.timestamp),
+      a.status.toUpperCase()
+    ])
+  ].map(row => row.join(',')).join('\n');
+  
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `attendance_${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+/* =========================
+   ADMIN — DELETE STUDENT
+   ========================= */
+$('#btnDeleteStudent').onclick = async () => {
+  const id = $('#deleteStudentId').value.trim();
+  const msg = $('#deleteStudentMsg');
+
+  if (!id) {
+    msg.textContent = "Please enter a valid Student ID.";
+    return;
+  }
+
+  if (!confirm(`Are you sure you want to delete enrollments and face data for Student ID ${id}?`)) return;
+
+  try {
+    const token = localStorage.getItem('token'); // your admin JWT token
+    const res = await fetch(`${API_BASE}/admin/student/${id}/reset`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    const out = await res.json();
+
+    if (res.ok) {
+      msg.textContent = out.message;
+      $('#deleteStudentId').value = '';
+    } else {
+      msg.textContent = `Error: ${out.detail || "Failed to delete student"}`;
+    }
+  } catch (err) {
+    msg.textContent = "Error connecting to server.";
+  }
+};
+
+
+
+/* =========================
+   STUDENT
+   ========================= */
+function loadStudent(){
+  show('#studentDash', true);
+  setupCamera(document.getElementById('checkVideo')).catch(()=>{
+    $('#checkMsg').textContent = 'Camera blocked. Allow camera and reload.';
+  });
+  refreshStudentCourses();
+  refreshStudentAttendanceHistory();
+}
+
+async function refreshStudentCourses(){
+  try{
+    const courses = await api('/courses/enrolled', 'GET');
+    studentCourses = courses;
+    updateStudentHistoryCourseFilter(courses);
+    renderStudentCourses(courses);
+  }catch(e){
+    $('#studentCourseRows').innerHTML = `<tr><td colspan="2" class="small status-err">${e.message||'Failed to load courses'}</td></tr>`;
+  }
+}
+
+function renderStudentCourses(courses){
+  const tbody = $('#studentCourseRows');
+  tbody.innerHTML = '';
+  if (!courses.length){
+    tbody.innerHTML = `<tr><td colspan="2" class="small">Not enrolled in any courses yet.</td></tr>`;
+    return;
+  }
+  for(const c of courses){
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${c.name}</td><td><span class="kbd">${c.id}</span></td>`;
+    tbody.appendChild(tr);
+  }
+}
+
+$('#studentCourseSearch').oninput = (e)=>{
+  const query = e.target.value.toLowerCase();
+  const filtered = studentCourses.filter(c => c.name.toLowerCase().includes(query));
+  renderStudentCourses(filtered);
+};
+
+$('#btnEnroll').onclick = async ()=>{
+  try{
+    const r = await api('/courses/enroll','POST',{ join_code: $('#joinCode').value.trim().toUpperCase() });
+    $('#enrollMsg').textContent = `Enrolled in course #${r.course_id}`;
+    $('#joinCode').value = '';
+    await refreshStudentCourses();
+  }catch(e){ $('#enrollMsg').textContent = e.message||'Enroll failed'; }
+};
+
+/* ---- REQUIRE LIVENESS + NONCE BEFORE CHECK-IN ---- */
+$('#btnCheckIn').onclick = async () => {
+  const msg = document.getElementById('checkMsg');
+  const videoEl = document.getElementById('checkVideo');
+  msg.textContent = 'Checking…';
+
+  try {
+    const courseId = +document.getElementById('checkinCourseId').value;
+    if (!courseId) { 
+      msg.textContent = 'Enter Course ID.'; 
+      return; 
+    }
+
+    const info = await api(`/sessions/active?course_id=${courseId}`, 'GET');
+    if (!info.active) { 
+      msg.textContent = 'No active session for this course.'; 
+      return; 
+    }
+
+    // --- STRICT LIVENESS CHECK ---
+    msg.textContent = 'Performing strict liveness check...';
+    let live = false;
+    try {
+      live = await runStrictLiveness(videoEl); // <-- strict check function
+    } catch (err) {
+      console.error('Liveness error:', err);
+      msg.textContent = 'Liveness failed: ' + err.message;
+      return;
+    }
+    if (!live) {
+      msg.textContent = 'Liveness check failed — please blink or move naturally.';
+      return;
+    }
+
+    // --- EMBEDDING FROM VIDEO ---
+    const vec = await embeddingFromVideoElement(videoEl);
+
+    // --- FETCH NONCE FOR SECURE CHECK-IN ---
+    const { nonce } = await api('/checkin/nonce', 'GET');
+
+    const r = await api('/checkin', 'POST', {
+      course_id: courseId,
+      face_embedding: vec,
+      liveness: true,
+      nonce
+    });
+
+    msg.textContent = `Checked in as ${String(r.status || 'present').toUpperCase()}`;
+    await refreshStudentAttendanceHistory();
+
+  } catch (err) {
+    console.error("Check-in error details:", err);
+
+    if (err.name === "TypeError" && err.message.includes("descriptor")) {
+      msg.textContent = "Face embedding error — try moving closer or adjust lighting.";
+    } else if (err.message.includes("No face detected")) {
+      msg.textContent = "No face detected — make sure your face is centered and well lit.";
+    } else if (err.message.includes("dimension")) {
+      msg.textContent = "Model mismatch: re-register your face to fix embedding size difference.";
+    } else {
+      msg.textContent = err.message || "Check-in failed.";
+    }
+  }
+};
+
+
+/* =========================
+   STUDENT ATTENDANCE HISTORY
+   ========================= */
+async function refreshStudentAttendanceHistory(){
+  try{
+    const data = await api('/attendance/my-history', 'GET');
+    studentAttendance = data;
+    renderStudentAttendanceHistory(data);
+  }catch(e){
+    $('#studentHistoryRows').innerHTML = `<tr><td colspan="4" class="small status-err">${e.message||'Failed to load history'}</td></tr>`;
+  }
+}
+
+function renderStudentAttendanceHistory(data){
+  const tbody = $('#studentHistoryRows');
+  tbody.innerHTML = '';
+  if (!data.length){
+    tbody.innerHTML = `<tr><td colspan="4" class="small">No attendance records yet.</td></tr>`;
+    return;
+  }
+  for(const a of data){
+    const date = toEasternDateOnly(a.timestamp);
+    const time = toEasternTimeOnly(a.timestamp);
+    const cls = a.status==='present' ? 'status-ok' : (a.status==='late' ? 'status-warn' : 'status-err');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+  <td>${date}</td>
+  <td>${a.course_name || 'N/A'}</td>
+  <td>${a.student_code || '—'}</td>
+  <td>${time}</td>
+  <td class="${cls}">${a.status.toUpperCase()}</td>`;
+
+    tbody.appendChild(tr);
+  }
+}
+
+function updateStudentHistoryCourseFilter(courses){
+  const select = $('#studentHistoryCourseFilter');
+  select.innerHTML = '<option value="">All Courses</option>';
+  for(const c of courses){
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = c.name;
+    select.appendChild(opt);
+  }
+}
+
+$('#studentHistoryCourseFilter').onchange = ()=>{
+  const courseId = $('#studentHistoryCourseFilter').value;
+  let filtered = studentAttendance;
+  if (courseId) filtered = filtered.filter(a => a.course_id == courseId);
+  renderStudentAttendanceHistory(filtered);
+};
+
+$('#btnExportStudentCSV').onclick = ()=>{
+  const data = studentAttendance;
+  if (!data.length){ alert('No data to export'); return; }
+  
+  const csv = [
+    ['Date', 'Course', 'Time (ET)', 'Status'],
+    ...data.map(a => [
+      toEasternDateOnly(a.timestamp),
+      a.course_name || 'N/A',
+      toEasternTimeOnly(a.timestamp),
+      a.status.toUpperCase()
+    ])
+  ].map(row => row.join(',')).join('\n');
+  
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `my_attendance_${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+/* =========================
+   DEMO PREP (auto-load models + camera)
+   ========================= */
+ (async function demoPrep() {
+    try {
+      const v = document.getElementById('checkVideo');
+      const m = document.getElementById('checkMsg');
+      if (m) m.textContent = 'Preparing camera and models...';
+      await loadFaceModels();
+      await setupCamera(v);
+      if (m) m.textContent = 'Ready — enter Course ID and press Check In';
+    } catch (err) {
+      console.warn('Demo prep failed:', err);
+      const m = document.getElementById('checkMsg');
+      if (m) m.textContent = 'Camera/models could not start — check console';
+    }
+  })();
+</script>
+
+<script>
+/* Page Transition Script */
+document.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.createElement('div');
+  overlay.className = 'page-transition';
+  document.body.appendChild(overlay);
+
+  const links = document.querySelectorAll('a[href^="index.html"], a[href^="about.html"], a[href^="pricing.html"], a[href^="app.html"], a[href^="contact.html"]');
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      overlay.classList.add('active');
+      setTimeout(() => { window.location.href = href; }, 200);
+    });
+  });
+});
+</script>
+</body>
+</html>
+

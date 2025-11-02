@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Attendo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-bg">
+<header>
+    <div class="header-brand">
+        <img src="assets/logo.png" class="header-logo" alt="VeriFace logo"/>
+        <div class="logo">Attendo</div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="app.html">Login</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </nav>
+</header>
+
+<section class="content fade-up">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you! Whether you're a professor, student, or organization, reach out for questions or support.</p>
+
+    <form class="contact-form">
+        <label>Name:</label>
+        <input type="text" placeholder="Your name" required>
+
+        <label>Email:</label>
+        <input type="email" placeholder="Your email" required>
+
+        <label>Message:</label>
+        <textarea placeholder="Write your message here..." rows="5" required></textarea>
+
+        <button type="submit" class="btn">Send Message</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 Attendo. All rights reserved.</p>
+</footer>
+
+<script>
+  // Fade-in fix
+  window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+  });
+
+  // Scroll fade-up animation
+  document.addEventListener("scroll", () => {
+    document.querySelectorAll(".fade-up").forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 80) el.classList.add("visible");
+    });
+  });
+
+  // Theme toggle
+  function initTheme() {
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    updateThemeIcon(saved);
+  }
+  function updateThemeIcon(theme) {
+    const icon = document.querySelector('#themeToggle .theme-icon');
+    if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  }
+  document.getElementById('themeToggle').onclick = () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  };
+  initTheme();
+</script>
+
+</body>
+</html>

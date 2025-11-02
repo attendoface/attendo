@@ -1,0 +1,23 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+pydantic[email]==2.5.0
+
+# Auth
+PyJWT==2.8.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# Env
+python-dotenv==1.0.0
+
+# Google Cloud SQL (PyMySQL)
+cloud-sql-python-connector[pymysql]==1.5.0
+pymysql==1.1.0
+
+# Anti-spoofing / image stack
+torch
+torchvision
+opencv-python
+pillow
+numpy

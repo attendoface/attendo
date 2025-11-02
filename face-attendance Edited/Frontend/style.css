@@ -1,0 +1,2109 @@
+/* =======================
+   VeriFace Complete Stylesheet
+   Marketing + App Integrated
+   ======================= */
+
+:root[data-theme="dark"] {
+  --bg-color: #0f1824;        /* main background */
+  --text-color: #ffffff;      /* white text */
+  --nav-bg: #151f2e;          /* slightly lighter than bg */
+  --card-bg: #192537;         /* card containers */
+  --btn-bg: #ffffff;          /* white buttons */
+  --btn-text: #0f1824;        /* dark text inside buttons */
+  --accent: #ffffff;          /* white highlight */
+  --text-light: #eaeaea;
+  --text-muted: #a0a6b1;
+  --features-bg: #0f1824;
+  --footer-bg: #0f1824;
+  --input-bg: #151f2e;
+  --input-text: #ffffff;
+  --input-border: #2a3446;
+  --input-placeholder: #8a8f98;
+  --line: rgba(255, 255, 255, 0.1);
+}
+:root[data-theme="light"] {
+  --bg-color: #f4f6fa;             /* subtle off-white background */
+  --text-color: #0b0f1a;           /* dark navy text */
+  --nav-bg: #ffffff;               /* clean white header */
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --btn-bg: #0b1324;               /* dark navy button */
+  --btn-text: #ffffff;
+  --accent: #222831;               /* <-- replaced blue with deep neutral gray */
+  --text-light: #2a2f3a;
+  --text-muted: #555d70;
+  --features-bg: #ffffff;
+  --footer-bg: #f1f3f8;
+  --input-bg: rgba(255,255,255,0.9);
+  --input-text: #0b0f1a;
+  --input-border: #cfd6e0;
+  --input-placeholder: #8b93a3;
+  --line: rgba(0,0,0,0.1);
+}
+
+/* ============================
+   LIGHT MODE REFINEMENTS
+   ============================ */
+.light-mode {
+  background-color: #f8f9fb;
+  color: #111;
+}
+
+/* --- HEADER / NAVBAR --- */
+.light-mode header {
+  background: #ffffff;
+  box-shadow: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.light-mode nav a {
+  color: #222;
+}
+
+.light-mode nav a:hover {
+  color: #000;
+}
+
+/* --- LOGO --- */
+.light-mode .logo img {
+  filter: brightness(0.2);
+}
+
+.light-mode .logo span {
+  color: #111;
+}
+
+/* --- FOOTER --- */
+.light-mode footer {
+  background: #f5f5f5;
+  color: #222;
+  border-top: 1px solid #ddd;
+}
+
+.light-mode footer a {
+  color: #333;
+}
+
+.light-mode footer a:hover {
+  color: #000;
+}
+
+/* --- TEXT ELEMENTS --- */
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode p,
+.light-mode li,
+.light-mode span,
+.light-mode label {
+  color: #111 !important;
+}
+
+/* --- SEPARATORS / LINES --- */
+.light-mode hr,
+.light-mode .divider {
+  background: linear-gradient(to right, transparent, #444, transparent);
+}
+
+/* --- CARDS / PANELS --- */
+.light-mode .card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- INPUTS / FORMS --- */
+.light-mode input,
+.light-mode textarea,
+.light-mode select {
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+}
+
+.light-mode input:focus,
+.light-mode textarea:focus,
+.light-mode select:focus {
+  border-color: #444;
+  outline: none;
+}
+
+/* --- BUTTONS --- */
+.light-mode .btn-primary {
+  background: transparent;
+  color: #111;
+  border: 1px solid #222;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.light-mode .btn-primary:hover {
+  background: #111;
+  color: #fff;
+}
+
+.light-mode .btn-secondary {
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+}
+
+.light-mode .btn-secondary:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* --- FORMS (LOGIN / CONTACT) --- */
+.light-mode .form-card,
+.light-mode form {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- TABLES --- */
+.light-mode table {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #111;
+}
+
+.light-mode th {
+  background: #f1f1f1;
+  color: #111;
+}
+
+.light-mode td {
+  border-top: 1px solid #eee;
+}
+
+/* --- LINKS --- */
+.light-mode a {
+  color: #0044cc;
+}
+
+.light-mode a:hover {
+  color: #002b80;
+}
+
+/* --- MISC ADJUSTMENTS --- */
+.light-mode .shadowed-box {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .muted {
+  color: #666;
+}
+
+
+/* Common Variables */
+:root {
+    --radius: 16px;
+    --radius-sm: 12px;
+    --radius-lg: 20px;
+    --speed: 0.2s;
+    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* =======================
+   Base Styles
+   ======================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== Base layout styling ===== */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background: var(--bg-color) !important; /* Force the same background for entire page */
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+header, nav {
+  background-color: var(--nav-bg);
+  transition: background-color 0.4s ease;
+}
+
+.card, section {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 12px;
+  transition: all 0.4s ease;
+}
+
+button, .btn-primary {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover, .btn-primary:hover {
+  opacity: 0.85;
+}
+
+
+/* Background Classes */
+body.home-bg,
+body.page-bg {
+    background: #ffffff;
+    color: var(--text-light);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Overlay effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay);
+    z-index: -1;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1400px;
+  height: 1400px;
+  background: url('assets/logo.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.02;
+  z-index: -2; /* lower than everything else */
+  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  z-index: 2; /* keep above background */
+}
+
+.features,
+.content,
+footer {
+  position: relative;
+  z-index: 3; /* ensure they appear on top of the logo */
+}
+
+
+/* =======================
+   Header Navigation
+   ======================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 50px;
+  background-color: var(--nav-bg) !important; /* solid background */
+  backdrop-filter: none !important; /* remove transparency/blur */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+
+.header-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important; /* controls distance between logo and text */
+}
+
+
+.header-brand img,
+.header-logo {
+  margin-right: 0 !important;
+  width: 40px;   /* adjust logo size if needed */
+  height: auto;
+}
+
+.brand {
+  margin-left: 0 !important;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  position: relative;
+  top: 1px;
+}
+.header-logo {
+  width: 100px !important;  /* was 40px — increase to make it pop */
+  height: auto !important;
+  margin-right: 2px !important;
+  transform: translateY(2px); /* subtle vertical centering */
+}
+
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: #ffffff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+  position: relative;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;       /* ← make text bigger */
+  padding: 5px 12px;     /* ← keep header height the same */
+  border-radius: 6px;
+  transition: color 0.3s ease;
+}
+
+nav ul li a.active,
+nav ul li a:visited,
+nav ul li a:hover {
+  font-weight: 600 !important; /* Keep weight consistent */
+}
+
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 60%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--text-light);
+  background: transparent; /* removes purple box */
+}
+
+nav ul li a.active {
+  font-weight: 600; /* or normal if you prefer */
+}
+.tab.active {
+  font-weight: 600; /* match non-active tabs */
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: #151f2e;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all var(--speed) ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.226);
+    transform: rotate(15deg) scale(1.05);
+}
+
+.theme-icon {
+    display: block;
+}
+
+/* =======================
+   Typography
+   ======================= */
+h1, h2, h3 {
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* === Section title fade lines (Pricing & Contact) === */
+.content h1::after {
+  content: "";
+  display: block;
+  width: 400px; /* controls line length */
+  height: 2px;
+  margin: 10px auto 0;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+}
+
+h2 {
+    font-size: 28px;
+    color: var(--ink);
+    position: relative;
+    padding-bottom: 16px;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; /* increase this to make it longer */
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0.8;
+}
+
+
+
+h3 {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.small {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.center {
+    text-align: center;
+}
+
+/* =======================
+   Hero Section
+   ======================= */
+.hero {
+    text-align: center;
+    padding: 140px 20px 40px; /* reduce bottom padding */
+    max-width: 1000px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 24px;
+    color: var(--text-light);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+  background-color: #ffffff !important;  /* white button */
+  color: #0f1824 !important;             /* navy text */
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.btn:hover {
+  background-color: #f3f3f3 !important;
+  color: #0f1824 !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+/* =======================
+   Content Sections
+   ======================= */
+.content {
+    padding: 140px 40px 60px;
+    max-width: 1100px;
+    margin: auto;
+    line-height: 1.8;
+    text-align: center;
+    flex: 1;
+}
+
+.content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+    color: var(--text-light);
+    font-weight: 700;
+    background: #ffffff;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.content h2 {
+    color: var(--accent);
+    margin-top: 40px;
+    margin-bottom: 16px;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.content p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+ul.team-list {
+    list-style: none;
+    margin-top: 20px;
+    padding-left: 0;
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: center;
+    gap: 18px;
+}
+
+ul.team-list li {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--text-light);
+}
+
+/* =======================
+   Features Section
+   ======================= */
+.features {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+   background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.features h2 {
+  color: #ffffff; /* keeps the title readable */
+}
+
+.feature-list {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.feature {
+  flex: 1 1 300px;
+  background: rgba(255, 255, 255, 0.03); /* transparent but visible */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 40px 30px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.08);
+}
+.feature h3 {
+    margin-bottom: 16px;
+    color: var(--accent);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.feature p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* =======================
+   Pricing Section
+   ======================= */
+.pricing-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.price-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
+}
+
+.price-card h2 {
+    color: var(--accent);
+    font-size: 1.75rem;
+    margin-bottom: 16px;
+}
+
+.price-card .price {
+    font-size: 3rem;
+    margin: 20px 0;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.price-card p {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.price-card ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+}
+
+.price-card ul li {
+    color: var(--text-light);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.95rem;
+}
+
+.price-card ul li:last-child {
+    border-bottom: none;
+}
+
+/* =======================
+   Contact Form
+   ======================= */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 40px auto 0;
+    max-width: 600px;
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--input-text);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--input-placeholder);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+
+    background: var(--card-bg);
+}
+
+.contact-form button {
+    cursor: pointer;
+    border: none;
+}
+
+/* =======================
+   Footer
+   ======================= */
+footer {
+    text-align: center;
+    padding: 30px 40px;
+    background: var(--footer-bg);
+    color: var(--text-muted);
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+footer p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* =======================
+   App Integration
+   ======================= */
+.app-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 120px 24px 40px;
+    min-height: calc(100vh - 80px);
+}
+
+.user-tag,
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--line);
+}
+
+.logout-btn,
+.btn-logout {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--err);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all var(--speed) ease;
+}
+
+.logout-btn:hover,
+.btn-logout:hover {
+    background: rgba(239, 68, 68, 0.15);
+    transform: translateY(-1px);
+}
+
+/* =======================
+   Card & Forms (App)
+   ======================= */
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    margin-bottom: 30px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform var(--speed) ease, box-shadow var(--speed) ease;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-header h3 {
+    margin: 0;
+}
+
+/* Forms */
+label {
+    display: block;
+    margin: 8px 0 6px 2px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.input, select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--ink);
+    font-size: 14px;
+    outline: none;
+    transition: all var(--speed) ease;
+}
+
+.input::placeholder {
+    color: var(--muted);
+    opacity: 0.6;
+}
+
+.input:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+    background: var(--card);
+}
+
+input[type="file"].input {
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+/* Search Box */
+.search-box {
+    margin-bottom: 12px;
+}
+
+.search-box .input {
+    background: var(--bg-2);
+}
+
+/* =======================
+   Buttons
+   ======================= */
+button {
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    user-select: none;
+    transition: all var(--speed) ease;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px 20px;
+    background: #ffffff;
+    color: white;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 6px 20px rgba(107, 70, 193, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(107, 70, 193, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--accent);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-sm);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+}
+
+.btn-ghost {
+    padding: 8px 14px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: var(--card-hover);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* === Active button fixes for sign-in / account type toggles === */
+button.active,
+.toggle-btn.active,
+.account-type.active {
+  background: #ffffff !important;   /* white background for active */
+  color: #0f1824 !important;        /* dark text so it’s visible */
+  font-weight: 700 !important;      /* make it look more “pressed” */
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+button:not(.active),
+.toggle-btn:not(.active),
+.account-type:not(.active) {
+  background: transparent !important;
+  color: #ffffff !important;        /* keep inactive buttons white text */
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* =======================
+   Tabs
+   ======================= */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tab {
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    min-width: 120px;
+    transition: all var(--speed) ease;
+}
+
+.tab:hover:not(.active) {
+    color: var(--ink);
+    background: var(--card-hover);
+}
+
+.tab.active {
+    background: #ffffff;
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 6px 20px rgba(107, 70, 193, 0.35);
+}
+
+/* =======================
+   Account Type Toggle (Student / Admin)
+   ======================= */
+.account-type button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.account-type button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.account-type button.active {
+  background: #ffffff;
+  color: #0f1824; /* dark navy text */
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* =======================
+   Tables
+   ======================= */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 14px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+
+.table thead {
+    background: var(--bg-2);
+}
+
+.table th {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.table tbody tr {
+    transition: background-color var(--speed) ease;
+}
+
+.table tbody tr:hover {
+    background: var(--card-hover);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Keyboard tag */
+.kbd {
+    font-family: var(--font-mono);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* =======================
+   Status Colors
+   ======================= */
+.status-ok {
+    color: var(--ok);
+    font-weight: 600;
+}
+
+.status-warn {
+    color: var(--warn);
+    font-weight: 600;
+}
+
+.status-err {
+    color: var(--err);
+    font-weight: 600;
+}
+
+/* =======================
+   Media Elements
+   ======================= */
+video, img.preview {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    box-shadow: var(--shadow-soft);
+}
+
+
+img.preview {
+    max-height: 300px;
+    object-fit: cover;
+}
+
+/* =======================
+   Utility Classes
+   ======================= */
+.hidden {
+    display: none !important;
+}
+
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+
+/* =======================
+   Focus States
+   ======================= */
+:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5) !important;
+    border-color: var(--accent) !important;
+}
+
+/* =======================
+   Animations
+   ======================= */
+@media (prefers-reduced-motion: no-preference) {
+    .card {
+        transition: transform var(--speed) ease, box-shadow var(--speed) ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 36px rgba(0,0,0,.15);
+    }
+}
+
+/* =======================
+   Form Layout Tweaks
+   ======================= */
+#signInForm > div:last-child,
+#createForm  > div:last-child {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#courseCreateMsg, 
+#createMsg, 
+#enrollMsg, 
+#checkMsg {
+    min-height: 20px;
+    margin-top: 10px;
+    color: var(--muted);
+}
+
+/* =======================
+   Responsive Design
+   ======================= */
+@media (max-width: 880px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+  body > *:not(header):first-of-type {
+    margin-top: 130px;
+  }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        padding: 14px 30px;
+        gap: 12px;
+    }
+
+    .header-brand {
+        flex: 1;
+    }
+
+    .header-logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    nav {
+        width: 100%;
+        order: 3;
+    }
+
+    nav ul {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    nav ul li a {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    .hero {
+        padding: 180px 20px 60px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .content {
+        padding: 160px 30px 50px;
+    }
+
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .features {
+        padding: 50px 30px;
+    }
+
+    .features h2 {
+        font-size: 2rem;
+    }
+
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    ul.team-list {
+        grid-template-columns: 1fr;
+    }
+
+    .app-container {
+        padding: 140px 20px 30px;
+    }
+
+    .card {
+        padding: 24px 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .tab {
+        min-width: auto;
+        padding: 9px 16px;
+    }
+
+    .table {
+        font-size: 13px;
+    }
+
+    .table th, .table td {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 520px) {
+    header {
+        padding: 12px 20px;
+    }
+
+    .header-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    nav ul {
+        gap: 6px;
+    }
+
+    nav ul li a {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    .hero {
+        padding: 200px 20px 50px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .content {
+        padding: 180px 20px 40px;
+    }
+
+    .features {
+        padding: 40px 20px;
+    }
+
+    .contact-form {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .app-container {
+        padding: 180px 16px 20px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .btn-secondary {
+        width: 100%;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+}
+
+/* ======================
+   Enhancements & Effects
+   ====================== */
+
+/* 1. Page Fade-In */
+
+/* 2. Header Slide Animation */
+header {
+  animation: slideDown 0.8s ease forwards;
+}
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Prevent header from covering content */
+body > *:not(header):first-of-type {
+  margin-top: 100px; /* adjust this to match header height */
+}
+
+/* 3. Scroll Fade-Up */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 4. Ripple + Glow on Buttons */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  background: rgba(255,255,255,0.4);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0.7;
+  pointer-events: none;
+  transition: transform 0.6s ease, opacity 0.8s ease;
+}
+.btn:active::after {
+  width: 200%;
+  height: 200%;
+  transform: scale(1);
+  opacity: 0;
+}
+.btn:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+}
+
+/* 5. Nav Underline Animation */
+nav ul li a::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #ffffff;
+  transition: width 0.3s;
+  margin: auto;
+}
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* 6. Hero Entrance Animation */
+.hero h1, .hero p, .hero .btn {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s ease forwards;
+}
+.hero h1 { animation-delay: 0.2s; }
+.hero p { animation-delay: 0.5s; }
+.hero .btn { animation-delay: 0.8s; }
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 7. Parallax Background */
+.hero {
+  background: transparent !important; /* same color as body */
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* === Temporary visibility fix === */
+.hero,
+.content,
+.features,
+.pricing-container,
+footer {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+/* Reduce top spacing so content starts closer to header */
+.hero,
+.content,
+.features {
+  padding-top: 100px; /* was 160px+ before — you can lower or tweak this */
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: #ffffff;
+  color: #0b1324;
+  border: none;
+  border-radius: 50px; /* bubble look */
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #f3f3f3;
+  color: #0b1324;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+/* Translucent container boxes (login, contact, pricing, team, etc.) */
+section, .card, .content, .pricing-container, .contact-form, .team-list li {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px) !important; /* soft hint only */
+}
+
+/* === Rounded translucent card refinement === */
+.price-card,
+.contact-form,
+.team-list li,
+section,
+.card {
+  background: rgba(255, 255, 255, 0.04) !important; /* subtle transparency */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 18px !important; /* softer corners */
+  backdrop-filter: blur(4px) !important; /* glass look */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* For pricing boxes specifically */
+.price-card {
+  border-radius: 20px !important;
+  overflow: hidden; /* ensures smooth edges on hover border glow */
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* For contact form container */
+.contact-form {
+  border-radius: 16px !important;
+  padding: 30px 35px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+}
+
+/* Input fields inside contact form */
+.contact-form input,
+.contact-form textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Remove background box behind the pricing cards */
+.pricing-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Keep individual pricing cards visible and elegant */
+.price-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 18px !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* === White underglow for buttons === */
+button,
+.btn,
+.toggle-btn {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.25) !important; /* soft white glow */
+}
+
+/* On hover or active, make it glow brighter */
+button:hover,
+.btn:hover,
+.toggle-btn.active {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* === Footer Cleanup (no global color override) === */
+footer {
+  background: #0f1824; /* same deep navy tone as the site */
+  border-top: none;    /* removes thin purple line */
+  box-shadow: none;
+}
+/* White underglow ONLY for interactive buttons */
+button,
+.btn,
+.toggle-btn {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.25) !important;
+  color: inherit; /* don’t override text colors */
+}
+
+/* Brighten on hover or active */
+button:hover,
+.btn:hover,
+.toggle-btn.active {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* === Restore status colors === */
+.status-ok {
+  color: #4ade80 !important; /* green */
+  text-shadow: none !important;
+}
+
+.status-err {
+  color: #ef4444 !important; /* red */
+  text-shadow: none !important;
+}
+
+.status-warn {
+  color: #facc15 !important; /* yellow */
+  text-shadow: none !important;
+}
+/* Center Admin Dashboard card */
+#adminDash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); /* fills most of viewport below header */
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(3px);
+}
+#adminDash .table {
+  width: 100% !important;
+  max-width: none;
+}
+.table th, .table td {
+  padding: 16px 24px !important;
+}
+
+/* Dark theme dropdown styling */
+select {
+  background-color: var(--input-bg) !important;   /* Match your dark input background */
+  color: var(--input-text) !important;            /* White text */
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  appearance: none;          /* removes browser default arrow styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+/* Optional: custom arrow icon using pseudo-element */
+select::-ms-expand {
+  display: none; /* removes default arrow in Edge/IE */
+}
+
+/* Dropdown list (the expanded part) */
+option {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+}
+
+/* On hover / focus */
+select:hover, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+/* Keep internal grid neat */
+#adminDash .grid {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Some builds create that line as a pseudo-element — remove it too */
+footer::before,
+footer::after {
+  display: none !important;
+  border: none !important;
+  background: none !important;
+}
+/* Remove background and border around the pricing section container */
+section.content {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* =========================================================
+   LIGHT MODE FIX PACK
+   ========================================================= */
+
+/* 0) Ensure all light variables exist & read well on white */
+:root[data-theme="light"]{
+  /* neutrals */
+  --ink: #0b0f1a;
+  --bg-2: #f7f8fb;
+  --card: #ffffff;
+  --card-hover: #f3f5f9;
+  --shadow: 0 12px 30px rgba(0,0,0,0.08);
+  --shadow-soft: 0 6px 18px rgba(0,0,0,0.06);
+  --line-strong: rgba(0,0,0,0.22);
+  --ok: #1b8d3b; --warn:#c28a08; --err:#c73a3a;
+}
+
+/* 1) Global text still appearing white → force dark ink in light mode */
+:root[data-theme="light"] body,
+:root[data-theme="light"] h1,
+:root[data-theme="light"] h2,
+:root[data-theme="light"] h3,
+:root[data-theme="light"] p,
+:root[data-theme="light"] li,
+:root[data-theme="light"] label,
+:root[data-theme="light"] .small {
+  color: var(--ink) !important;
+}
+
+/* 2) Header — remove the white “bar/shadow” look */
+:root[data-theme="light"] header {
+  background: var(--nav-bg) !important;      /* your light var (#f5f6f8) */
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: none !important;
+}
+
+/* 3) Brand/logo should be dark on light */
+:root[data-theme="light"] .brand,
+:root[data-theme="light"] .logo {
+  color: var(--ink) !important;
+  -webkit-text-fill-color: var(--ink) !important;
+  background: none !important;
+}
+/* If the logo is an image (currently white), tint it darker */
+:root[data-theme="light"] .header-logo,
+:root[data-theme="light"] .header-brand img {
+  filter: grayscale(1) brightness(0) contrast(1.2);
+}
+
+/* 4) Footer should be light with dark text */
+:root[data-theme="light"] footer{
+  background: var(--footer-bg) !important;   /* #f5f5f5 */
+  color: var(--text-muted) !important;
+  border-top: 1px solid var(--line) !important;
+  box-shadow: none !important;
+}
+
+/* 5) Cards/sections that were translucent in dark: make crisp white */
+:root[data-theme="light"] section,
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .pricing-container,
+:root[data-theme="light"] .team-list li {
+  background: rgba(255, 255, 255, 0.55) !important; /* semi-transparent white */
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+  backdrop-filter: blur(14px) !important;
+  border-radius: 18px !important;
+}
+
+/* 6) Contact form inputs — add dark outline & proper placeholder */
+:root[data-theme="light"] .contact-form input,
+:root[data-theme="light"] .contact-form textarea,
+:root[data-theme="light"] .input,
+:root[data-theme="light"] select {
+  background: var(--input-bg) !important;      /* white */
+  color: var(--input-text) !important;         /* dark ink */
+  border: 1px solid var(--input-border) !important; /* #d6d6d6 */
+}
+:root[data-theme="light"] .contact-form input::placeholder,
+:root[data-theme="light"] .contact-form textarea::placeholder,
+:root[data-theme="light"] .input::placeholder{
+  color: var(--input-placeholder) !important;
+}
+
+/* 7) The faded title rules/underlines should be dark in light mode */
+:root[data-theme="light"] h2::after,
+:root[data-theme="light"] .section-header::after,
+:root[data-theme="light"] .title-underline::after {
+  background: linear-gradient(90deg,
+              rgba(0,0,0,0) 0%,
+              rgba(0,0,0,0.35) 50%,
+              rgba(0,0,0,0) 100%) !important;
+  opacity: .7 !important;
+}
+
+/* 8) Auth/Login buttons: no white chips; add outline */
+:root[data-theme="light"] .btn,
+:root[data-theme="light"] .btn-primary,
+:root[data-theme="light"] .btn-secondary,
+:root[data-theme="light"] .tab,
+:root[data-theme="light"] .tab.active {
+  background: var(--btn-bg) !important;     /* dark button bg from vars */
+  color: var(--btn-text) !important;         /* white text from vars */
+  border: 1px solid var(--input-border) !important;
+  box-shadow: none !important;
+}
+/* the two toggle “Sign In / Create Account” pills */
+:root[data-theme="light"] .auth-toggle .tab { 
+  background: var(--card) !important; 
+  color: var(--ink) !important;
+}
+:root[data-theme="light"] .auth-toggle .tab.active {
+  background: var(--ink) !important;
+  color: #fff !important;
+}
+
+/* 9) Pricing cards — guarantee dark text inside */
+:root[data-theme="light"] .price-card,
+:root[data-theme="light"] .price-card h2,
+:root[data-theme="light"] .price-card .price,
+:root[data-theme="light"] .price-card p,
+:root[data-theme="light"] .price-card li {
+  color: var(--ink) !important;
+}
+
+/* 10) Kill any leftover white underglow/rings on buttons in light mode */
+:root[data-theme="light"] .btn::after { display:none !important; }
+
+/* 11) Make the watermark logo in background less invasive in light mode */
+:root[data-theme="light"] body::after{
+  opacity: 0.03 !important;           /* lighter so it doesn’t fog text */
+  filter: grayscale(1) brightness(0.3);
+}
+:root[data-theme="light"] body::after {
+  content: "";
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1400px;
+  height: 1400px;
+  background: url('assets/logo.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.04; /* slightly stronger since light bg */
+  z-index: -2;
+  pointer-events: none;
+  filter: grayscale(1) brightness(0.1); /* faint gray watermark */
+}
+
+:root[data-theme="light"] section,
+:root[data-theme="light"] .card {
+  animation: fadeInGlass 0.8s ease forwards;
+}
+
+@keyframes fadeInGlass {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* =====================================
+   LIGHT MODE — POLISHED GLASS STYLE (no outlines)
+   ===================================== */
+:root[data-theme="light"] section,
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .pricing-container,
+:root[data-theme="light"] .team-list li,
+:root[data-theme="light"] .contact-form {
+  background: rgba(255, 255, 255, 0.15) !important; /* soft frosted white */
+  border: none !important;                         /* remove outline */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);      /* soft floating shadow */
+  backdrop-filter: blur(1px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-radius: 18px !important;
+  transition: all 0.4s ease-in-out;
+}
+
+/* --- Overall light background stays soft --- */
+:root[data-theme="light"] body {
+  background: linear-gradient(
+    to bottom right,
+    rgba(245, 247, 250, 0.85),
+    rgba(255, 255, 255, 0.9)
+  ) !important;
+  color: #111;
+}
+
+/* --- Light mode background watermark --- */
+:root[data-theme="light"] body::after {
+  content: "";
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1400px;
+  height: 1400px;
+  background: url('assets/logo.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.10; /* increase for stronger visibility (0.05–0.25 range looks good) */
+  z-index: -2;
+  pointer-events: none;
+  filter: grayscale(1) brightness(0.25) contrast(1.1);
+}
+/* Light mode underline color fix */
+:root[data-theme="light"] nav ul li a::after {
+  background: var(--accent) !important;  /* uses your defined soft blue */
+}
+
+/* ======== Fix for unwanted bold text on Login tabs ======== */
+nav ul li a.active,
+.tab.active {
+  font-weight: 500 !important; /* make consistent with normal text */
+}
+
+/* For Sign In / Create Account buttons */
+.auth-toggle .tab.active {
+  font-weight: 500 !important;
+}
+
+/* Optional: prevent extra shadow or emphasis if applied */
+.tab.active,
+.auth-toggle .tab.active {
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+/* ======== Normalize active tab/link font weight globally ======== */
+
+/* For header navigation (Home, Pricing, Contact, etc.) */
+nav ul li a,
+nav ul li a.active,
+nav ul li a:hover {
+  font-weight: 500 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* For all general tabs (outside login forms) */
+.tab,
+.tab.active,
+button.tab.active {
+  font-weight: 500 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep Login/Signup toggle consistent too */
+.auth-toggle .tab.active {
+  font-weight: 500 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+/* Common Button Styling */
+.start-btn, .stop-btn {
+  background: transparent;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect – invert color */
+.start-btn:hover, .stop-btn:hover {
+  background: var(--text-color);
+  color: var(--bg-color);
+  transform: scale(1.05);
+}
+
+/* Disabled state (faded + no hover effect) */
+.start-btn:disabled, .stop-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: transparent;
+  border: 2px solid var(--text-muted);
+  color: var(--text-muted);
+}
+
+/* --- Force Light/Dark Theme Buttons (Start / Stop / Delete) --- */
+#adminDash button,
+#adminDash .btn-primary {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+  border: 1px solid rgba(0, 0, 0, 0.4) !important; /* in light mode */
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Hover invert effect */
+#adminDash button:hover,
+#adminDash .btn-primary:hover {
+  background-color: var(--text-color) !important;
+  color: var(--bg-color) !important;
+}
+
+/* Delete button variant */
+#adminDash .btn-delete {
+  border-color: #c0392b !important;
+  color: #c0392b !important;
+}
+
+#adminDash .btn-delete:hover {
+  background-color: #c0392b !important;
+  color: #fff !important;
+}
+/* === BUTTONS — LIGHT MODE FIXES === */
+:root[data-theme="light"] .btn-ghost,
+:root[data-theme="light"] .btn-danger {
+  color: var(--text-color);
+  border: 0.8px solid rgba(0, 0, 0, 0.4);
+  background-color: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect — invert colors */
+:root[data-theme="light"] .btn-ghost:hover,
+:root[data-theme="light"] .btn-danger:hover {
+  background-color: var(--text-color);
+  color: var(--btn-text);
+}
+
+/* Optional: ensure consistent padding & rounded look */
+.btn-ghost, .btn-danger {
+  border-radius: 3px;
+  padding: 6px 14px;
+  font-weight: 500;
+}
+
+#studentDash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  min-height: 80vh; /* keeps it vertically centered */
+  width: 100%;
+}

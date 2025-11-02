@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Attendo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-bg">
+<header>
+    <div class="header-brand">
+        <img src="assets/logo.png" class="header-logo" alt="VeriFace logo"/>
+        <div class="logo">Attendo</div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="app.html">Login</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </nav>
+</header>
+<section class="content fade-up">
+    <h1>About Attendo</h1>
+    <p>Attendo is an innovative web-based face recognition attendance system designed to save time and improve accuracy in classrooms and workplaces. Our mission is to make attendance effortless, efficient, and secure.</p>
+
+    <h2>Our Vision</h2>
+    <p>We believe professors and organizations should spend less time managing attendance and more time focusing on education and productivity.</p>
+
+    <h2>Technology</h2>
+    <p>Built with Python, MySQL, and responsive web design — accessible on any device. All facial data is temporary and deleted every semester to ensure privacy.</p>
+
+    <h2>Our Team</h2>
+    <ul class="team-list">
+        <li>Dhriti Nijhawan</li>
+        <li>Mark Hanna</li>
+        <li>Jenish Patel</li>
+        <li>Jude Kurtas</li>
+        <li>Ahmed Hassan</li>
+    </ul>
+</section>
+
+<footer>
+    <p>&copy; 2025 Attendo. All rights reserved.</p>
+</footer>
+</div>
+<script>
+  // Fade-in fix
+  window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+  });
+
+  // Scroll fade-up animation
+  document.addEventListener("scroll", () => {
+    document.querySelectorAll(".fade-up").forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 80) el.classList.add("visible");
+    });
+  });
+
+  // Theme toggle
+  function initTheme() {
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    updateThemeIcon(saved);
+  }
+  function updateThemeIcon(theme) {
+    const icon = document.querySelector('#themeToggle .theme-icon');
+    if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  }
+  document.getElementById('themeToggle').onclick = () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  };
+  initTheme();
+</script>
+
+</body>
+</html>
