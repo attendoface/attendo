@@ -10,6 +10,7 @@ pydantic[email]==2.5.0
 PyJWT==2.8.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.6
+python-jose==3.3.0
 
 # Env
 python-dotenv==1.0.0
@@ -27,3 +28,4 @@ opencv-python-headless==4.10.0.84
 # --extra-index-url https://download.pytorch.org/whl/cpu
 # torch==2.5.1+cpu
 # torchvision==0.24.0+cpu
+
