@@ -29,13 +29,7 @@ from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float, 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session, relationship
 
-from google.cloud.sql.connector import Connector
 import pymysql
-
-# ============= CONFIGURATION =============
-SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
 
 # ============= CONFIGURATION =============
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
