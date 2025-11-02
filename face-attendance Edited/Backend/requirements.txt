@@ -15,7 +15,7 @@ python-multipart==0.0.6
 python-dotenv==1.0.0
 
 # Database driver (Postgres default)
-psycopg[binary]==3.2.1
+psycopg2-binary==2.9.9
 # pymysql==1.1.0          # uncomment if using MySQL
 
 # Optional ML/image stack
@@ -27,6 +27,7 @@ opencv-python-headless==4.10.0.84
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.5.1+cpu
 torchvision==0.24.0+cpu
+
 
 
 
