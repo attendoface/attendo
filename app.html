@@ -1006,22 +1006,36 @@ $('#btnExportStudentCSV').onclick = ()=>{
 </script>
 
 <script>
-/* Page Transition Script */
-document.addEventListener('DOMContentLoaded', function() {
-  const overlay = document.createElement('div');
-  overlay.className = 'page-transition';
-  document.body.appendChild(overlay);
+/* Page Transition Script — FIXED to prevent infinite recursion */
+if (!window._pageTransitionBound) {
+  window._pageTransitionBound = true;
 
-  const links = document.querySelectorAll('a[href^="index.html"], a[href^="about.html"], a[href^="pricing.html"], a[href^="app.html"], a[href^="contact.html"]');
-  links.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const href = this.getAttribute('href');
-      overlay.classList.add('active');
-      setTimeout(() => { window.location.href = href; }, 200);
+  document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.createElement('div');
+    overlay.className = 'page-transition';
+    document.body.appendChild(overlay);
+
+    const links = document.querySelectorAll(
+      'a[href^="index.html"], a[href^="about.html"], a[href^="pricing.html"], a[href^="app.html"], a[href^="contact.html"]'
+    );
+
+    links.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const href = this.getAttribute('href');
+
+        // prevent self-navigation (app.html → app.html)
+        if (window.location.pathname.endsWith(href)) return;
+
+        overlay.classList.add('active');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 200);
+      });
     });
   });
-});
+}
 </script>
 </body>
 </html>
