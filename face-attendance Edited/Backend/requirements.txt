@@ -14,19 +14,19 @@ python-multipart==0.0.6
 # Env
 python-dotenv==1.0.0
 
-# Choose ONE database driver (match your DATABASE_URL):
-psycopg[binary]==3.2.1    # for Postgres (Render default)  ← pick this
-# pymysql==1.1.0          # for MySQL (uncomment if you use MySQL)
+# Database driver (Render’s default PostgreSQL)
+psycopg[binary]==3.2.1
+# pymysql==1.1.0          # uncomment if you switch to MySQL
 
-# Optional ML/image stack (keep only if you really use it)
+# Optional ML/image stack
 numpy==1.26.4
 pillow==10.4.0
 opencv-python-headless==4.10.0.84
 
-# Optional: PyTorch CPU (comment out if not needed)
+# Optional: PyTorch CPU build (for model-based tasks)
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.2.2
-torchvision==0.17.2
+torch==2.5.1+cpu
+torchvision==0.20.1+cpu
 
 
 
