@@ -23,7 +23,7 @@ numpy==1.26.4
 pillow==10.4.0
 opencv-python-headless==4.10.0.84
 
-# Torch CPU build
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.5.1+cpu
-torchvision==0.24.0+cpu
+# Torch CPU build (disabled for now)
+# --extra-index-url https://download.pytorch.org/whl/cpu
+# torch==2.5.1+cpu
+# torchvision==0.24.0+cpu
